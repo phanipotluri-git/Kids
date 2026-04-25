@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Global Edge School – Grade 3 | 30-Day Worksheet Pack</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1a2744; --math:#1d4ed8; --mathL:#dbeafe;
+  --eng:#047857; --engL:#d1fae5; --evs:#b45309; --evsL:#fef3c7;
+  --tel:#6d28d9; --telL:#ede9fe; --hin:#be185d; --hinL:#fce7f3;
+  --bg:#fffcf4; --border:#e2e8f0; --text:#1e293b;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── TOP BAR ── */
+.topbar{background:var(–navy);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-left h1{font-family:‘Fredoka One’,cursive;font-size:17px;letter-spacing:.4px;}
+.topbar-left p{font-size:10px;opacity:.65;margin-top:1px;}
+.print-btn{background:#f59e0b;color:#1a2744;border:none;padding:7px 16px;border-radius:6px;font-family:‘Nunito’,sans-serif;font-weight:800;font-size:12px;cursor:pointer;}
+.print-btn:hover{background:#d97706;}
+
+/* ── DAY NAV ── */
+.daynav{background:#f1f5f9;border-bottom:1px solid var(–border);padding:10px 20px;display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+.daynav-label{font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-right:6px;white-space:nowrap;}
+.dbtn{width:29px;height:29px;border:2px solid #cbd5e1;background:#fff;border-radius:50%;font-size:11px;font-weight:800;color:#475569;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+.dbtn:hover{border-color:var(–math);color:var(–math);}
+.dbtn.active{background:var(–navy);border-color:var(–navy);color:#fff;}
+
+/* ── WORKSHEET CONTAINER ── */
+.ws-wrap{max-width:830px;margin:20px auto;padding:0 14px 60px;}
+
+/* ── NAV ARROWS ── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.arrowbtn{background:var(–navy);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-family:‘Nunito’,sans-serif;font-weight:700;font-size:12px;cursor:pointer;}
+.arrowbtn:hover{background:#0f172a;}
+.arrowbtn:disabled{background:#cbd5e1;color:#94a3b8;cursor:not-allowed;}
+.day-pill{font-family:‘Fredoka One’,cursive;font-size:18px;color:var(–navy);}
+
+/* ── WORKSHEET HEADER ── */
+.ws-head{border:2px solid var(–navy);border-radius:10px;overflow:hidden;margin-bottom:14px;}
+.wsh-top{background:var(–navy);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:9px 18px;}
+.wsh-school{font-family:‘Fredoka One’,cursive;font-size:19px;}
+.wsh-year{font-size:13px;font-weight:700;}
+.wsh-bottom{display:grid;grid-template-columns:1fr 1fr;}
+.wsh-cell{padding:7px 16px;font-size:12px;font-weight:800;}
+.wsh-cell:first-child{border-right:1px solid var(–navy);}
+.wsh-cell span{font-weight:500;color:#475569;}
+
+.ws-banner{background:#f8fafc;border:1.5px solid var(–border);border-radius:8px;padding:10px 16px;margin-bottom:12px;font-family:‘Fredoka One’,cursive;font-size:16px;color:var(–navy);}
+.ws-note{background:#fefce8;border:1.5px solid #fde047;border-radius:6px;padding:7px 14px;font-size:12px;font-weight:700;color:#713f12;margin-bottom:14px;}
+
+/* ── SUBJECT BLOCKS ── */
+.subj{margin-bottom:18px;border-radius:10px;overflow:hidden;border:1.5px solid;}
+.subj.M{border-color:var(–math);}
+.subj.E{border-color:var(–eng);}
+.subj.V{border-color:var(–evs);}
+.subj.T{border-color:var(–tel);}
+.subj.H{border-color:var(–hin);}
+
+.subj-hd{padding:9px 16px;color:#fff;font-family:‘Fredoka One’,cursive;font-size:16px;display:flex;justify-content:space-between;align-items:center;}
+.subj.M .subj-hd{background:var(–math);}
+.subj.E .subj-hd{background:var(–eng);}
+.subj.V .subj-hd{background:var(–evs);}
+.subj.T .subj-hd{background:var(–tel);}
+.subj.H .subj-hd{background:var(–hin);}
+.subj-topic{font-size:11px;font-weight:600;opacity:.85;}
+
+.subj-body{padding:14px 16px;}
+.subj.M .subj-body{background:var(–mathL);}
+.subj.E .subj-body{background:var(–engL);}
+.subj.V .subj-body{background:var(–evsL);}
+.subj.T .subj-body{background:var(–telL);}
+.subj.H .subj-body{background:var(–hinL);}
+
+.ex{margin-bottom:14px;}
+.ex:last-child{margin-bottom:0;}
+.ex-head{font-size:12px;font-weight:900;color:#0f172a;margin-bottom:7px;line-height:1.4;}
+.ex-items{list-style:none;padding:0;}
+.ex-items li{font-size:12.5px;padding:4px 0 4px 16px;position:relative;border-bottom:1px dotted #94a3b8;line-height:1.6;}
+.ex-items li:last-child{border-bottom:none;}
+.ex-items li::before{content:”•”;position:absolute;left:0;color:#94a3b8;font-size:14px;}
+.wp-box{background:#fff;border:1.5px dashed #94a3b8;border-radius:7px;padding:11px;font-size:12.5px;line-height:1.6;}
+.wp-ans{font-weight:800;margin-top:7px;font-size:13px;}
+.read-box{font-size:20px;letter-spacing:8px;padding:8px 0;line-height:2.2;font-weight:700;}
+.draw-hint{border:1.5px dashed #94a3b8;border-radius:6px;height:65px;margin-top:7px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;font-style:italic;}
+.comp-passage{background:#fff;border-left:4px solid #cbd5e1;padding:10px 12px;font-size:12.5px;line-height:1.7;margin-bottom:10px;border-radius:0 6px 6px 0;}
+
+/* ── PARENTS NOTE ── */
+.pnote{background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:12px 16px;margin-top:16px;}
+.pnote-title{font-size:13px;font-weight:900;color:#166534;margin-bottom:6px;}
+.pnote ul{list-style:none;padding:0;}
+.pnote ul li{font-size:11.5px;color:#166534;padding:2px 0 2px 18px;position:relative;}
+.pnote ul li::before{content:“✓”;position:absolute;left:0;}
+.ws-footer{text-align:center;font-size:10px;color:#94a3b8;font-style:italic;margin-top:14px;padding-top:10px;border-top:1px solid var(–border);}
+
+/* ── PRINT ── */
+@media print{
+.topbar,.daynav,.nav-row,.print-btn{display:none!important;}
+body{background:#fff;}
+.ws-wrap{max-width:100%;margin:0;padding:0 8px;}
+.subj-body{background:#fff!important;-webkit-print-color-adjust:exact;}
+.subj-hd{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.wsh-top{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.subj{break-inside:avoid;}
+.pnote{background:#fff!important;border:1px solid #ccc;}
+.ws-note{background:#fffde7!important;-webkit-print-color-adjust:exact;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <h1>🏫 The Global Edge School</h1>
+    <p>Grade 3 · 30-Day Worksheet Pack · 2026–27</p>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print This Worksheet</button>
+</div>
+
+<div class="daynav" id="daynav">
+  <span class="daynav-label">Worksheet</span>
+</div>
+
+<div class="ws-wrap" id="wsArea"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+//  DATA — 30 DAYS
+//  Structure: { day, l2, math:{topic,parts[]}, english:{topic,parts[]},
+//               evs:{topic,parts[]}, l2data:{topic,parts[]} }
+//  Each part: { head, items[], wp:{text,ans}, read, comp:{pass,qs[]} }
+// ════════════════════════════════════════════════════════════
+const D = [
+{day:1,l2:'Telugu',
+ math:{topic:'Addition of Like Fractions',parts:[
+  {head:'A. Add the fractions',items:['2/5 + 1/5 = ____','3/8 + 2/8 = ____','4/6 + 1/6 = ____','1/4 + 2/4 = ____']},
+  {head:'B. Fill in the blanks (Answer orally)',items:['While adding like fractions, we add the _________.','The denominator remains the _________.']},
+  {head:'C. Word Problem',wp:{text:'Riya ate 2/8 of a pizza and her brother ate 3/8. How much did they eat together?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Types of Sentences',parts:[
+  {head:'A. Identify the type of sentence (Declarative / Interrogative / Exclamatory / Imperative)',items:['What is your name? ______','I like ice cream. ______','Please close the door. ______','Wow! That is amazing! ______','This is my house. ______','How are you? ______','Open the book. ______','Oh no! I lost my keys! ______']},
+  {head:'B. Give one example of each type (Oral)',items:['Statement: ________________________________','Question: ________________________________','Command: ________________________________','Exclamation: _____________________________']}
+ ]},
+ evs:{topic:'Natural and Man-Made Things',parts:[
+  {head:'A. Fill in the blanks',items:['Things made by nature are called _______ things.','Things made by humans are called _______ things.']},
+  {head:'B. Write and Draw',items:['Name 5 sense organs and their functions. Draw and label them in your notebook.','Name any 3 natural things.','Name any 3 man-made things.']}
+ ]},
+ l2data:{topic:'Telugu Vowels – అచ్చులు',parts:[
+  {head:'A. Read aloud',read:true,text:'అ  ఆ  ఇ  ఈ  ఉ  ఊ  ఎ  ఏ  ఐ  ఒ  ఓ  ఔ  అం  అః'},
+  {head:'B. Written Work',items:['Write each vowel 3 times in your notebook.','Write 3 Telugu words you know and their meanings in English.']}
+ ]}
+},
+{day:2,l2:'Hindi',
+ math:{topic:'Subtraction of Like Fractions',parts:[
+  {head:'A. Subtract the fractions',items:['5/7 − 2/7 = ____','6/9 − 3/9 = ____','4/5 − 1/5 = ____','7/8 − 3/8 = ____']},
+  {head:'B. Fill in the blanks (Oral)',items:['While subtracting like fractions, we subtract the _________.','The denominator remains the _________.']},
+  {head:'C. Word Problem',wp:{text:'A ribbon was 6/10 m long. Ram cut 2/10 m from it. How much ribbon is left?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Types of Sentences – Writing Practice',parts:[
+  {head:'A. Write two sentences of each type',items:['Declarative (Statement): 1. _________ 2. _________','Interrogative (Question): 1. _________ 2. _________','Imperative (Command): 1. _________ 2. _________','Exclamatory: 1. _________ 2. _________']},
+  {head:'B. Match the sentence to its type',items:['"Please sit down." → ___________','"The earth is round." → ___________','"How old are you?" → ___________','"Hurray! We won!" → ___________']}
+ ]},
+ evs:{topic:'Our Sense Organs',parts:[
+  {head:'A. Fill in the blanks',items:['We use our _______ to see.','We use our _______ to hear.','We use our _______ to smell.','We use our _______ to taste.','We use our _______ to feel.']},
+  {head:'B. Match the sense organ to its function',items:['Eye  →  ___________','Ear  →  ___________','Nose  →  ___________','Tongue  →  ___________','Skin  →  ___________']},
+  {head:'C. Draw and Label',draw:true,text:'Draw and label any 2 sense organs in your notebook.'}
+ ]},
+ l2data:{topic:'Hindi Vowels – स्वर',parts:[
+  {head:'A. Read aloud',read:true,text:'अ  आ  इ  ई  उ  ऊ  ए  ऐ  ओ  औ  अं  अः'},
+  {head:'B. Written Work',items:['Write each vowel 3 times in your notebook.','Write 3 Hindi words you know and their meanings in English.']}
+ ]}
+},
+{day:3,l2:'Telugu',
+ math:{topic:'Addition & Subtraction of Fractions – Mixed',parts:[
+  {head:'A. Solve',items:['3/7 + 2/7 = ____','4/9 − 1/9 = ____','2/6 + 3/6 = ____','5/8 − 2/8 = ____']},
+  {head:'B. True or False',items:['"2/5 + 1/5 = 3/10"  → _______','"4/6 − 1/6 = 3/6"   → _______','"3/8 + 4/8 = 7/8"   → _______']},
+  {head:'C. Word Problem',wp:{text:'A tank was 7/9 full. After watering plants it became 4/9 full. How much water was used?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Making Correct Sentences',parts:[
+  {head:'A. Rearrange the words to make correct sentences',items:['name / your / what / is / ? → ____________________','school / I / to / go / daily → ____________________','sat / mat / cat / the / on / the → ____________________','very / the / is / sun / bright / . → ____________________']},
+  {head:'B. Add the correct punctuation mark (. ? ! ,)',items:['The sun rises in the east ___','What is your favourite colour ___','Hurray we won the match ___','She likes apples oranges and bananas ___']}
+ ]},
+ evs:{topic:'Parts of Our Body',parts:[
+  {head:'A. Fill in the blanks',items:['We have ___ eyes and ___ ears.','We have ___ hands and ___ legs.','Our _______ pumps blood through the body.']},
+  {head:'B. Write 3 things you do to keep your body healthy',items:['1. _______________________','2. _______________________','3. _______________________']},
+  {head:'C. Draw',draw:true,text:'Draw a simple body outline and label: head, neck, shoulder, elbow, knee, ankle.'}
+ ]},
+ l2data:{topic:'Telugu Consonants – హల్లులు (Set 1)',parts:[
+  {head:'A. Read aloud',read:true,text:'క  ఖ  గ  ఘ  ఙ\nచ  ఛ  జ  ఝ  ఞ'},
+  {head:'B. Written Work',items:['Write each consonant 3 times.','Write 2 words starting with "క" and 2 words starting with "జ".']}
+ ]}
+},
+{day:4,l2:'Hindi',
+ math:{topic:'Comparing Fractions (Same Denominator)',parts:[
+  {head:'A. Fill in > , < or =',items:['3/8  ___  5/8','2/6  ___  1/6','4/7  ___  6/7','1/5  ___  3/5','7/9  ___  7/9']},
+  {head:'B. Arrange in ascending order (smallest to biggest)',items:['2/9 , 5/9 , 1/9 , 7/9  → ___________________________']},
+  {head:'C. Word Problem',wp:{text:'Priya drank 3/5 of her water bottle. Ramesh drank 4/5 of his. Who drank more? How much more?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Common and Proper Nouns',parts:[
+  {head:'A. Underline common nouns, circle proper nouns',items:['Rahul goes to Delhi with his father.','My dog is named Bruno.','The Ganga is a long river in India.','Sara bought a book from the library.']},
+  {head:'B. Write 3 common nouns and 3 proper nouns of your own',items:['Common nouns: _________ , _________ , _________','Proper nouns: _________ , _________ , _________']},
+  {head:'C. Fill in the blanks',items:['A common noun names any _______ person, place or thing.','A proper noun is a _______ name and begins with a _______ letter.']}
+ ]},
+ evs:{topic:'Parts of a Plant',parts:[
+  {head:'A. Fill in the blanks',items:['The _______ holds the plant in the ground.','The _______ carries water and minerals to all parts.','The _______ makes food for the plant using sunlight.','The _______ helps in reproduction.']},
+  {head:'B. Write the function of each part',items:['Root → ___________________________','Leaf → ___________________________','Flower → ___________________________','Fruit → ___________________________']},
+  {head:'C. Draw and label a plant',draw:true,text:'Draw a plant and label: root, stem, leaf, flower, fruit, seed.'}
+ ]},
+ l2data:{topic:'Hindi Consonants – व्यंजन (Set 1)',parts:[
+  {head:'A. Read aloud',read:true,text:'क  ख  ग  घ  ङ\nच  छ  ज  झ  ञ'},
+  {head:'B. Written Work',items:['Write each consonant 3 times.','Write 2 words starting with "क" and 2 starting with "ज".']}
+ ]}
+},
+{day:5,l2:'Telugu',
+ math:{topic:'Ordering Fractions (Same Denominator)',parts:[
+  {head:'A. Arrange in ascending order',items:['3/10, 1/10, 7/10, 5/10  → ___________________________','2/8, 6/8, 4/8, 8/8  → ___________________________']},
+  {head:'B. Fill in the blanks',items:['When denominators are the same, the fraction with the bigger _______ is larger.','1/8 is the _______ fraction in the group 1/8, 3/8, 5/8, 7/8.']},
+  {head:'C. Word Problem',wp:{text:'Four friends ate: Anu 2/8, Bob 5/8, Rani 3/8, Tom 6/8 of a cake. Who ate the most? Who ate the least?',ans:'Most: ____________ Least: ____________'}}
+ ]},
+ english:{topic:'Singular and Plural Nouns',parts:[
+  {head:'A. Write the plural form',items:['cat → ______','box → ______','baby → ______','leaf → ______','man → ______','child → ______','tooth → ______','bus → ______']},
+  {head:'B. Fill in the rule',items:['Add "s" to most nouns. Example: _______.','Add "es" to nouns ending in s, x, sh, ch. Example: _______.','Change "y" to "ies" for nouns ending in y. Example: _______.']},
+  {head:'C. Write 2 sentences using plural nouns',items:['1. ________________________________','2. ________________________________']}
+ ]},
+ evs:{topic:'Uses of Plants',parts:[
+  {head:'A. Match the plant to its use',items:['Mango tree  →  ___________','Neem tree  →  ___________','Cotton plant  →  ___________','Tulsi  →  ___________','Bamboo  →  ___________']},
+  {head:'B. Write 3 things we eat that come from plants',items:['1. ________________  2. ________________  3. ________________']},
+  {head:'C. True or False',items:['"Trees give us oxygen."  → _______','"Plants are not important for animals."  → _______','"We get paper from trees."  → _______']}
+ ]},
+ l2data:{topic:'Telugu Consonants – హల్లులు (Set 2)',parts:[
+  {head:'A. Read aloud',read:true,text:'ట  ఠ  డ  ఢ  ణ\nత  థ  ద  ధ  న'},
+  {head:'B. Written Work',items:['Write each consonant 3 times.','Write 2 simple words using any consonants from Set 1 or Set 2.']}
+ ]}
+},
+{day:6,l2:'Hindi',
+ math:{topic:'Introduction to Mixed Numbers',parts:[
+  {head:'A. Convert to mixed numbers (first one done for you)',items:['7/3 = 2 and 1/3  (because 6/3 = 2 whole, 1/3 remaining)','5/2 = _______','8/3 = _______','9/4 = _______']},
+  {head:'B. Fill in the blanks',items:['A fraction greater than 1 is called an _______ fraction.','A mixed number has a _______ part and a _______ part.']},
+  {head:'C. Word Problem',wp:{text:'Raju ate 2 and 1/4 rotis for lunch. His sister ate 1 and 3/4 rotis. Who ate more?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Collective Nouns',parts:[
+  {head:'A. Fill in the correct collective noun',items:['a _______ of lions','a _______ of birds','a _______ of fish','a _______ of students','a _______ of flowers','a _______ of books']},
+  {head:'B. Write 2 sentences using collective nouns',items:['1. ________________________________','2. ________________________________']},
+  {head:'C. Write 3 more collective nouns of your own',items:['1. ___________  2. ___________  3. ___________']}
+ ]},
+ evs:{topic:'Types of Plants',parts:[
+  {head:'A. Identify the type (Herb / Shrub / Tree)',items:['Rose → ______','Mango → ______','Mint → ______','Neem → ______','Tulsi → ______','Banana → ______']},
+  {head:'B. Fill in the blanks',items:['Plants with soft green stems are called _______.','Plants taller than shrubs with woody trunks are called _______.','The smallest type of plant is a _______.']},
+  {head:'C. Draw',draw:true,text:'Draw a tree, a shrub, and a herb. Label each one.'}
+ ]},
+ l2data:{topic:'Hindi Barakhadi – "क" Family',parts:[
+  {head:'A. Read aloud',read:true,text:'क  का  कि  की  कु  कू  के  कै  को  कौ  कं  कः'},
+  {head:'B. Written Work',items:['Write the full Barakhadi of "क" twice in your notebook.','Write 2 words using each: कि, कू, को']}
+ ]}
+},
+{day:7,l2:'Telugu',
+ math:{topic:'Multiplication – Tables of 2 and 3',parts:[
+  {head:'A. Complete the multiplication table',items:['2×1=___ , 2×2=___ , 2×3=___ , 2×4=___ , 2×5=___','2×6=___ , 2×7=___ , 2×8=___ , 2×9=___ , 2×10=___']},
+  {head:'B. Fill in the blanks',items:['3×4 = ___','3×7 = ___','3×9 = ___','3×6 = ___']},
+  {head:'C. Word Problem',wp:{text:'There are 3 baskets with 4 apples in each basket. How many apples are there in all?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Personal Pronouns',parts:[
+  {head:'A. Replace the underlined noun with a pronoun',items:['Ravi plays cricket. → _______ plays cricket.','Priya is very kind. → _______ is very kind.','The dog barked loudly. → _______ barked loudly.','Ram and I are friends. → _______ are friends.']},
+  {head:'B. Fill with he / she / it / they / we / I',items:['Priya is my sister. _______ is kind.','The sun is hot. _______ shines brightly.','My brothers play football. _______ play well.','My friend and I study together. _______ study hard.']},
+  {head:'C. Complete the table',items:['I → my ,  he → _____ ,  she → _____ ,  we → _____ ,  they → _____']}
+ ]},
+ evs:{topic:'Wild Animals',parts:[
+  {head:'A. Write 5 wild animals and where they live',items:['1. ______________ lives in ____________','2. ______________ lives in ____________','3. ______________ lives in ____________','4. ______________ lives in ____________','5. ______________ lives in ____________']},
+  {head:'B. Match the animal to its home',items:['Tiger  →  ___________','Fish  →  ___________','Eagle  →  ___________','Camel  →  ___________','Lion  →  ___________']},
+  {head:'C. Classify as Carnivore / Herbivore / Omnivore',items:['Cow → ______  Lion → ______  Crow → ______  Deer → ______  Bear → ______']}
+ ]},
+ l2data:{topic:'Simple 2-Letter Telugu Words',parts:[
+  {head:'A. Read aloud',read:true,text:'కల  పల  మన  నల  తర  వన  జల  రవి  పతి  కవి'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write the meaning (in English) of any 3 words.']}
+ ]}
+},
+{day:8,l2:'Hindi',
+ math:{topic:'Multiplication – Tables of 4 and 5',parts:[
+  {head:'A. Complete the multiplication table',items:['4×1=___ , 4×2=___ , 4×3=___ , 4×4=___ , 4×5=___','4×6=___ , 4×7=___ , 4×8=___ , 4×9=___ , 4×10=___']},
+  {head:'B. Fill in the blanks',items:['5×3 = ___','5×6 = ___','5×8 = ___','5×7 = ___']},
+  {head:'C. Word Problem',wp:{text:'Each box has 5 chocolates. There are 4 boxes. How many chocolates are there in all?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Pronouns – Replacing Nouns in Sentences',parts:[
+  {head:'A. Rewrite each sentence, replacing the underlined noun with a pronoun',items:['The teacher read a story aloud. → _____________________________','Sara and Meena are classmates. → _____________________________','The puppy is sleeping in a basket. → _____________________________','Tom and I went to the park. → _____________________________']},
+  {head:'B. Choose the correct pronoun',items:['(He/She) is my brother. → ___','(They/We) are my parents. → ___','(I/Me) love to sing. → ___','(It/He) is a beautiful flower. → ___']}
+ ]},
+ evs:{topic:'Domestic Animals',parts:[
+  {head:'A. Fill in the table',items:['Cow gives us → ___________','Hen gives us → ___________','Sheep gives us → ___________','Dog helps us by → ___________','Horse helps us by → ___________']},
+  {head:'B. Fill in the blanks',items:['Animals kept at home and on farms are called _______ animals.','Animals living in forests are called _______ animals.']},
+  {head:'C. Draw',draw:true,text:'Draw and label any one domestic animal in your notebook.'}
+ ]},
+ l2data:{topic:'Simple 2-Letter Hindi Words',parts:[
+  {head:'A. Read aloud',read:true,text:'कल  पल  मन  नल  दल  फल  जल  घर  कब  सब'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write the meaning (in English) of any 3 words.']}
+ ]}
+},
+{day:9,l2:'Telugu',
+ math:{topic:'Multiplication Tables 2–5 (Mixed Practice)',parts:[
+  {head:'A. Mixed multiplication',items:['3×6 = ___','4×7 = ___','2×9 = ___','5×8 = ___','3×8 = ___','4×9 = ___']},
+  {head:'B. Find the missing number',items:['4 × ___ = 20','3 × ___ = 15','2 × ___ = 14','5 × ___ = 30']},
+  {head:'C. Word Problem',wp:{text:'A class has 5 rows of desks. Each row has 6 desks. How many desks are there in total?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Adjectives – Describing Words',parts:[
+  {head:'A. Underline the adjectives',items:['"The big red ball rolled down the steep hill."','"The clever girl solved the difficult puzzle."','"She wore a long blue dress at the grand party."']},
+  {head:'B. Fill with a suitable adjective',items:['The _______ elephant ate _______ leaves.','I live in a _______ house with a _______ garden.','The _______ dog barked at the _______ stranger.']},
+  {head:'C. Write 3 adjectives to describe each',items:['A lion: _________ , _________ , _________','A flower: _________ , _________ , _________','Your school: _________ , _________ , _________']}
+ ]},
+ evs:{topic:'What Animals Eat',parts:[
+  {head:'A. Sort into Herbivore / Carnivore / Omnivore',items:['Cow → ______  Lion → ______  Crow → ______  Deer → ______','Bear → ______  Tiger → ______  Rabbit → ______  Dog → ______']},
+  {head:'B. Define',items:['Herbivore: ________________________________','Carnivore: ________________________________','Omnivore: ________________________________']},
+  {head:'C. Write 2 examples of each type',items:['Herbivores: _____________ and _____________','Carnivores: _____________ and _____________','Omnivores: _____________ and _____________']}
+ ]},
+ l2data:{topic:'3-Letter Telugu Words + Meanings',parts:[
+  {head:'A. Read aloud',read:true,text:'పండు  కలం  మనసు  రాజు  వెలుగు  పాలు  చేప  పులి  అడవి  గాలి'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write the meaning in English for each word.']}
+ ]}
+},
+{day:10,l2:'Hindi',
+ math:{topic:'Multiplication – Tables of 6 and 7',parts:[
+  {head:'A. Complete the table',items:['6×1=___ , 6×2=___ , 6×3=___ , 6×4=___ , 6×5=___','6×6=___ , 6×7=___ , 6×8=___ , 6×9=___ , 6×10=___']},
+  {head:'B. Fill in the blanks',items:['7×3 = ___','7×6 = ___','7×9 = ___','7×7 = ___']},
+  {head:'C. Word Problem',wp:{text:'There are 7 shelves in a library. Each shelf has 6 books. How many books are there in total?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Adjectives – Size, Shape, Colour and Number',parts:[
+  {head:'A. Write 3 adjectives for each category',items:['Size: _________ , _________ , _________','Shape: _________ , _________ , _________','Colour: _________ , _________ , _________']},
+  {head:'B. Add adjectives to improve the sentences',items:['"The cat sat on the mat." → "The ___ cat sat on the ___ mat."','"A bird flew over a tree." → "A ___ bird flew over a ___ tree."']},
+  {head:'C. Write the opposite adjective',items:['hot → ___  tall → ___  heavy → ___  old → ___  dark → ___']}
+ ]},
+ evs:{topic:'Food Groups',parts:[
+  {head:'A. Sort into the correct food group',items:['Rice, Milk, Apple, Egg, Butter, Bread, Carrot, Fish, Banana, Cheese','Cereals/Grains: _______________________________','Dairy: _______________________________','Fruits & Vegetables: _______________________________','Protein (meat, eggs, pulses): _______________________________']},
+  {head:'B. Fill in the blanks',items:['We get energy from _______ foods.','We get proteins from _______ and _______.','Fruits and vegetables give us _______ and _______.']},
+  {head:'C. Write what you ate for breakfast and which group it belongs to',items:['Food: _______________ Group: _______________']}
+ ]},
+ l2data:{topic:'3-Letter Hindi Words + Meanings',parts:[
+  {head:'A. Read aloud',read:true,text:'फल  जल  नमक  घर  कमल  सड़क  बाजार  पानी  आकाश  जंगल'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write the meaning in English for each word.']}
+ ]}
+},
+{day:11,l2:'Telugu',
+ math:{topic:'Multiplication – Tables of 8 and 9',parts:[
+  {head:'A. Complete the table',items:['8×1=___ , 8×2=___ , 8×3=___ , 8×4=___ , 8×5=___','8×6=___ , 8×7=___ , 8×8=___ , 8×9=___ , 8×10=___']},
+  {head:'B. Fill in the blanks',items:['9×4 = ___','9×7 = ___','9×6 = ___','9×9 = ___']},
+  {head:'C. Word Problem',wp:{text:'A spider has 8 legs. How many legs do 6 spiders have?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Verbs – Action Words',parts:[
+  {head:'A. Underline the verbs',items:['"The children run and play in the park."','"The teacher reads a story and writes on the board."','"Birds fly and sing in the trees."']},
+  {head:'B. Write 5 action verbs for each',items:['Things you do at school: _________ , _________ , _________ , _________ , _________','Things you do at home: _________ , _________ , _________ , _________ , _________']},
+  {head:'C. Fill with a suitable verb',items:['Birds _______ in the sky.  Fish _______ in water.','Dogs _______ and bark.  Frogs _______ from rock to rock.']}
+ ]},
+ evs:{topic:'Healthy and Junk Food',parts:[
+  {head:'A. Sort into Healthy / Junk',items:['pizza, salad, chips, fresh fruit, soda, milk, cake, vegetables, burger, dal','Healthy: _______________________________','Junk: _______________________________']},
+  {head:'B. Fill in the blanks',items:['Eating too much junk food can cause _______ and _______.','Fruits and vegetables give us _______ and help us stay _______.']},
+  {head:'C. Write your ideal healthy day\'s meals',items:['Breakfast: _______________________________','Lunch: _______________________________','Dinner: _______________________________']}
+ ]},
+ l2data:{topic:'Body Parts in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'తల  కళ్ళు  చెవులు  ముక్కు  నోరు  చేతులు  కాళ్ళు  వేళ్ళు  భుజం  మెడ'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 sentences about body parts (oral).']}
+ ]}
+},
+{day:12,l2:'Hindi',
+ math:{topic:'Multiplication Tables 6–9 (Mixed Practice)',parts:[
+  {head:'A. Mixed multiplication',items:['6×7=___  8×4=___  9×6=___  7×8=___  9×9=___  6×9=___']},
+  {head:'B. Find the missing number',items:['8 × ___ = 64','9 × ___ = 63','7 × ___ = 56','6 × ___ = 48']},
+  {head:'C. Word Problem',wp:{text:'A school has 9 classrooms. Each classroom has 8 windows. How many windows are there in all?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Helping Verbs – is, am, are',parts:[
+  {head:'A. Fill with is / am / are',items:['I _______ a student.','She _______ my best friend.','They _______ playing in the garden.','The birds _______ flying high.','We _______ very happy today.']},
+  {head:'B. Write 5 sentences using is, am, are (at least one of each)',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'C. Fill the rule',items:['We use "am" with _______.','We use "is" with he / she / it and _______.','We use "are" with you / we / _______ and plural nouns.']}
+ ]},
+ evs:{topic:'Good Habits and Hygiene',parts:[
+  {head:'A. Write 5 good daily habits',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'B. True or False',items:['"We should brush our teeth twice a day."  → _______','"We should not wash hands before eating."  → _______','"Exercise keeps us fit and healthy."  → _______','"Eating vegetables is bad for health."  → _______']},
+  {head:'C. Write your morning routine in 3–4 sentences',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ l2data:{topic:'Body Parts in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'सिर  आँखें  कान  नाक  मुँह  हाथ  पैर  उँगलियाँ  कंधा  गला'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 sentences about body parts (oral).']}
+ ]}
+},
+{day:13,l2:'Telugu',
+ math:{topic:'Division as Equal Sharing (÷2, ÷3)',parts:[
+  {head:'A. Divide',items:['10 ÷ 2 = ___','15 ÷ 3 = ___','8 ÷ 2 = ___','12 ÷ 3 = ___','18 ÷ 3 = ___','14 ÷ 2 = ___']},
+  {head:'B. Fill in the blanks',items:['10 ÷ 2 means sharing 10 into _______ equal groups. Each group has _______.','Division is the _______ of multiplication.']},
+  {head:'C. Word Problem',wp:{text:'18 mangoes are shared equally among 3 children. How many mangoes does each child get?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Was and Were (Past of is / am / are)',parts:[
+  {head:'A. Fill with was / were',items:['I _______ at home yesterday.','She _______ very happy.','They _______ playing in the rain.','The dog _______ sleeping near the door.','We _______ late for school.']},
+  {head:'B. Write 3 sentences using "was" and 3 using "were"',items:['was: 1. _______________________ 2. _______________________ 3. _______________________','were: 1. _______________________ 2. _______________________ 3. _______________________']},
+  {head:'C. Change to past tense',items:['"I am tired." → _______ tired.  "They are friends." → _______ friends.','\"She is happy.\" → _______ happy.  "We are at school." → _______ at school.']}
+ ]},
+ evs:{topic:'Our Bones – The Skeleton',parts:[
+  {head:'A. Name 5 important bones or parts of the skeleton',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Fill in the blanks',items:['Our skeleton is made of _______.','It protects our _______ organs like the heart and lungs.','Bones are joined at places called _______.']},
+  {head:'C. Write 2 reasons why bones are important',items:['1. ________________________________','2. ________________________________']}
+ ]},
+ l2data:{topic:'Fruits and Vegetables in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'మామిడి  అరటి  నిమ్మ  టమాటా  పాలకూర  బంగాళాదుంప  ద్రాక్ష  బొప్పాయి'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 Telugu sentences about fruits or vegetables (oral).']}
+ ]}
+},
+{day:14,l2:'Hindi',
+ math:{topic:'Division (÷4, ÷5)',parts:[
+  {head:'A. Divide',items:['20 ÷ 4 = ___','25 ÷ 5 = ___','16 ÷ 4 = ___','35 ÷ 5 = ___','24 ÷ 4 = ___','40 ÷ 5 = ___']},
+  {head:'B. Fill in – Multiplication and Division are related',items:['20 ÷ 4 = ___  because  4 × ___ = 20','35 ÷ 5 = ___  because  5 × ___ = 35']},
+  {head:'C. Word Problem',wp:{text:'A farmer has 35 oranges. He puts them equally into 5 baskets. How many oranges go in each basket?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Simple Present Tense',parts:[
+  {head:'A. Fill with the correct verb form (add s / es where needed)',items:['She _______ (play) cricket every day.','He _______ (watch) TV in the evening.','Birds _______ (fly) south in winter.','The baby _______ (cry) every night.']},
+  {head:'B. Write 5 sentences in simple present tense about your daily routine',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'C. Fill the rule',items:['Add "s" to the verb for he / she / it.  Example: _______.','Add "es" for verbs ending in s, x, sh, ch.  Example: _______.','Do NOT add "s" for I / we / they.  Example: _______.']}
+ ]},
+ evs:{topic:'Our Muscles and Exercise',parts:[
+  {head:'A. Write 3 types of exercise and one benefit of each',items:['1. ________________ → ________________','2. ________________ → ________________','3. ________________ → ________________']},
+  {head:'B. Fill in the blanks',items:['Muscles help us _______ our body.','Regular exercise makes our muscles _______ and _______.','Playing sports helps exercise our _______ muscles.']},
+  {head:'C. Write 3 sports and which body parts they exercise most',items:['1. _____________ → _______ 2. _____________ → _______ 3. _____________ → _______']}
+ ]},
+ l2data:{topic:'Fruits and Vegetables in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'आम  केला  नींबू  टमाटर  पालक  आलू  अंगूर  पपीता  गाजर  प्याज'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 Hindi sentences about fruits or vegetables (oral).']}
+ ]}
+},
+{day:15,l2:'Telugu',
+ math:{topic:'Division – Word Problems and Link to Multiplication',parts:[
+  {head:'A. Write the related multiplication fact',items:['18 ÷ 3 = 6  →  3 × ___ = 18','20 ÷ 4 = 5  →  4 × ___ = 20','27 ÷ 9 = 3  →  9 × ___ = 27','32 ÷ 8 = 4  →  8 × ___ = 32']},
+  {head:'B. Fill in the blanks',items:['Division is the _______ of multiplication.','To check a division answer we can _______ the quotient by the divisor.']},
+  {head:'C. Word Problems',wp:{text:'(1) A baker has 24 cupcakes. She puts 4 on each plate. How many plates does she need?\n(2) A team of 5 children must collect 30 leaves equally. How many leaves per child?',ans:'Answer 1: ____________  Answer 2: ____________'}}
+ ]},
+ english:{topic:'Simple Past Tense (-ed)',parts:[
+  {head:'A. Change to past tense',items:['walk → ______','play → ______','jump → ______','clean → ______','cook → ______','help → ______']},
+  {head:'B. Fill with past tense',items:['Yesterday I _______ (study) for 2 hours.','She _______ (help) her mother after school.','They _______ (play) cricket in the evening.','He _______ (finish) his homework early.']},
+  {head:'C. Write 5 sentences about what you did yesterday',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']}
+ ]},
+ evs:{topic:'Our Digestive System (Simple)',parts:[
+  {head:'A. Write the order food travels through the body',items:['Mouth → _______ → _______ → _______ → _______']},
+  {head:'B. Fill in the blanks',items:['Food is broken down in the _______.','The small intestine absorbs _______ from food.','Undigested food is removed by the _______.']},
+  {head:'C. Write 2 good habits for healthy digestion',items:['1. ________________________________','2. ________________________________']}
+ ]},
+ l2data:{topic:'Simple Telugu Sentences – Reading',parts:[
+  {head:'A. Read each sentence aloud 3 times',read:true,text:'రాజు రోజూ పాఠశాలకు వెళ్తాడు.\nఅమ్మ వంట చేస్తుంది.\nనేను పుస్తకం చదువుతాను.\nనీళ్ళు త్రాగటం మంచిది.'},
+  {head:'B. Written Work',items:['Write each sentence twice in your notebook.','Write the meaning of each sentence in English.']}
+ ]}
+},
+{day:16,l2:'Hindi',
+ math:{topic:'Length – Centimetres and Metres',parts:[
+  {head:'A. Fill in the blanks',items:['1 metre = _______ cm','2 m = _______ cm','150 cm = _______ m _______ cm','300 cm = _______ m']},
+  {head:'B. Add the lengths',items:['30 cm + 45 cm = _______ cm','1 m 20 cm + 50 cm = _______ m _______ cm','2 m 35 cm + 1 m 40 cm = _______ m _______ cm']},
+  {head:'C. Word Problem',wp:{text:'A rope is 85 cm long. Another rope is 40 cm long. What is the total length in metres and centimetres?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Present and Past Tense – Mixed Practice',parts:[
+  {head:'A. Change from present to past tense',items:['She eats an apple. → _______________________________','He walks to school. → _______________________________','They play in the park. → _______________________________','I read a story. → _______________________________']},
+  {head:'B. Change from past to present tense',items:['He walked to school. → _______________________________','She helped her friend. → _______________________________','We played cricket. → _______________________________']},
+  {head:'C. Fill the correct tense',items:['Yesterday, I _______ (go) to the park.  Today, I _______ (stay) at home.','Last week she _______ (finish) the book.  Now she _______ (read) a new one.']}
+ ]},
+ evs:{topic:'Air – Properties and Uses',parts:[
+  {head:'A. Write 5 properties of air',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'B. Write 3 uses of air',items:['1. ________________________  2. ________________________  3. ________________________']},
+  {head:'C. Fill in the blanks',items:['Moving air is called _______.','Air is a mixture of _______ and other gases.','Plants need _______ from air to make food.']}
+ ]},
+ l2data:{topic:'Simple Hindi Sentences – Reading',parts:[
+  {head:'A. Read each sentence aloud 3 times',read:true,text:'राजू रोज़ स्कूल जाता है।\nमाँ खाना बनाती है।\nमैं किताब पढ़ता हूँ।\nपानी पीना अच्छा है।'},
+  {head:'B. Written Work',items:['Write each sentence twice in your notebook.','Write the meaning of each sentence in English.']}
+ ]}
+},
+{day:17,l2:'Telugu',
+ math:{topic:'Length – Metres and Kilometres',parts:[
+  {head:'A. Fill in the blanks',items:['100 cm = _______ m','1 km = _______ m','500 m = _______ km','2 km = _______ m']},
+  {head:'B. Choose the best unit (cm / m / km)',items:['Length of a room → _______','Distance between two cities → _______','Length of a pencil → _______','Height of a building → _______']},
+  {head:'C. Word Problem',wp:{text:'The school is 2 km from Riya\'s home. The market is 500 m from school. What is the total distance from Riya\'s home to the market?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Articles – a and an',parts:[
+  {head:'A. Fill with "a" or "an"',items:['___ apple    ___ book    ___ orange    ___ umbrella','___ honest man    ___ car    ___ hour    ___ elephant','___ university    ___ eye    ___ ant    ___ useful tool']},
+  {head:'B. Fill the rule',items:['Use "a" before words starting with a _______ sound.  Example: _______.','Use "an" before words starting with a _______ sound.  Example: _______.']},
+  {head:'C. Write 5 sentences using "a" or "an"',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']}
+ ]},
+ evs:{topic:'Wind – Uses and Storms',parts:[
+  {head:'A. Write 3 uses of wind',items:['1. ________________________','2. ________________________','3. ________________________']},
+  {head:'B. Write 2 harmful effects of storms or cyclones',items:['1. ________________________','2. ________________________']},
+  {head:'C. Fill in the blanks',items:['Very fast moving air is called a _______.','A windmill uses _______ energy to grind grain or generate electricity.','We should stay _______ during a storm.']}
+ ]},
+ l2data:{topic:'Numbers 1–20 in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'ఒకటి  రెండు  మూడు  నాలుగు  అయిదు  ఆరు  ఏడు  ఎనిమిది  తొమ్మిది  పది\nపదకొండు  పన్నెండు  పదమూడు  పద్నాలుగు  పదిహేను  పదహారు  పదిహేడు  పదిహెనిమిది  పందొమ్మిది  ఇరవై'},
+  {head:'B. Written Work',items:['Write the Telugu words for numbers 1–10 three times each.','Write Telugu number words for: 7, 13, 18, 20.']}
+ ]}
+},
+{day:18,l2:'Hindi',
+ math:{topic:'Weight – Kilograms and Grams',parts:[
+  {head:'A. Fill in the blanks',items:['1 kg = _______ g','2 kg = _______ g','500 g = _______ kg','1 kg 250 g = _______ g']},
+  {head:'B. Add the weights',items:['3 kg + 500 g = _______ g = _______ kg _______ g','1 kg 200 g + 800 g = _______ kg','2 kg 400 g + 1 kg 600 g = _______ kg']},
+  {head:'C. Word Problem',wp:{text:'A bag of rice weighs 5 kg. A bag of sugar weighs 2 kg 500 g. What is the total weight in kg and grams?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Article – the',parts:[
+  {head:'A. Fill with "the" where needed',items:['___ sun rises in the east.','I ate ___ apple that was on the table.','___ Taj Mahal is beautiful.','She is ___ best student in the class.','He wants to be ___ doctor.']},
+  {head:'B. Write 5 sentences using "the"',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'C. Fill the rule',items:['Use "the" when talking about something _______ or already mentioned.','Use "a / an" when talking about something for the _______ time.']}
+ ]},
+ evs:{topic:'Sources of Water',parts:[
+  {head:'A. Write 5 sources of water',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Fill in the blanks',items:['The largest source of water on Earth is _______.','We drink _______ water.','Rain water collects in _______ and _______.']},
+  {head:'C. Write 2 ways to get clean drinking water',items:['1. ________________________','2. ________________________']}
+ ]},
+ l2data:{topic:'Numbers 1–20 in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'एक  दो  तीन  चार  पाँच  छह  सात  आठ  नौ  दस\nग्यारह  बारह  तेरह  चौदह  पंद्रह  सोलह  सत्रह  अठारह  उन्नीस  बीस'},
+  {head:'B. Written Work',items:['Write the Hindi words for numbers 1–10 three times each.','Write Hindi number words for: 5, 12, 16, 20.']}
+ ]}
+},
+{day:19,l2:'Telugu',
+ math:{topic:'Capacity – Litres and Millilitres',parts:[
+  {head:'A. Fill in the blanks',items:['1 litre = _______ ml','2 litres = _______ ml','500 ml = _______ L','250 ml = _______ L']},
+  {head:'B. Add the capacities',items:['1 L 500 ml + 500 ml = _______ L','2 L 300 ml + 700 ml = _______ L','1 L 200 ml + 1 L 800 ml = _______ L']},
+  {head:'C. Word Problem',wp:{text:'A water bottle holds 750 ml. Priya drinks 4 such bottles a day. How much water does she drink in total?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Articles – Mixed Practice (a, an, the)',parts:[
+  {head:'A. Fill with a / an / the',items:['___ doctor is ___ important person.','I saw ___ owl last night. ___ owl was on ___ tree.','He is ___ honest man and ___ best player in ___ team.']},
+  {head:'B. Correct the mistakes',items:['"He is an brave boy." → _______________________________','"She ate the mango which was nice yesterday." → _______________________________']},
+  {head:'C. Write a short paragraph (4 sentences) using a, an, and the at least once each',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ evs:{topic:'Uses of Water and Conservation',parts:[
+  {head:'A. Write 5 uses of water',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Write 5 ways to save water',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'C. Fill in the blanks',items:['We should not _______ water.','Water is precious because _______.','Turn off the _______ when not using water.']}
+ ]},
+ l2data:{topic:'Days of the Week in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'సోమవారం  మంగళవారం  బుధవారం  గురువారం  శుక్రవారం  శనివారం  ఆదివారం'},
+  {head:'B. Written Work',items:['Write each day 3 times.','Write the Telugu names for: Monday, Wednesday, Friday, Sunday.']}
+ ]}
+},
+{day:20,l2:'Hindi',
+ math:{topic:'Measurement – Mixed Revision',parts:[
+  {head:'A. Solve',items:['45 cm + 65 cm = _______ m _______ cm','1 kg – 300 g = _______ g','2 L 250 ml + 750 ml = _______ L','3 m – 150 cm = _______ m _______ cm']},
+  {head:'B. Choose the right unit',items:['A bucket holds 10 ___ (L / ml)','A bag of flour weighs 1 ___ (kg / g)','A pencil is 15 ___ (cm / m)','A car journey of 50 ___ (m / km)']},
+  {head:'C. Word Problem',wp:{text:'A jug has 2 L of juice. Riya drinks 500 ml. Her brother drinks 750 ml. How much juice is left?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Conjunctions – and, but, or',parts:[
+  {head:'A. Fill with and / but / or',items:['I like tea _______ coffee.','She is tall _______ her brother is short.','Do you want rice _______ bread?','He tried hard _______ he did not give up.']},
+  {head:'B. Join the pairs of sentences using and, but, or',items:['Ram likes cricket. Shyam likes football. → _______________________________','She is smart. She is also very kind. → _______________________________','You can walk. You can take the bus. → _______________________________']},
+  {head:'C. Write 3 original sentences using and, but, or (one each)',items:['and: ________________________','but: ________________________','or: ________________________']}
+ ]},
+ evs:{topic:'Weather – Types and Seasons',parts:[
+  {head:'A. Write 4 types of weather',items:['1. ___________  2. ___________  3. ___________  4. ___________']},
+  {head:'B. Fill in the blanks',items:['We wear _______ clothes in winter.','We carry _______ in rainy weather.','In summer we drink more _______.']},
+  {head:'C. Describe today\'s weather in 3 sentences',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ l2data:{topic:'Days of the Week in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'सोमवार  मंगलवार  बुधवार  गुरुवार  शुक्रवार  शनिवार  रविवार'},
+  {head:'B. Written Work',items:['Write each day 3 times.','Write the Hindi names for: Monday, Wednesday, Friday, Sunday.']}
+ ]}
+},
+{day:21,l2:'Telugu',
+ math:{topic:'2D Shapes – Sides and Corners',parts:[
+  {head:'A. Fill in the properties of each shape',items:['Triangle: _______ sides, _______ corners','Rectangle: _______ sides, _______ corners','Square: _______ sides, _______ corners','Circle: _______ sides, _______ corners']},
+  {head:'B. Name the shape from its description',items:['I have 3 sides and 3 angles. I am a _______.','I have 4 equal sides and 4 right angles. I am a _______.','I have no sides or corners. I am a _______.','I have 4 sides – 2 long and 2 short. I am a _______.']},
+  {head:'C. Draw',draw:true,text:'Draw a triangle, rectangle, square, and circle. Label each one.'}
+ ]},
+ english:{topic:'Conjunctions – because and so',parts:[
+  {head:'A. Fill with because / so',items:['I wore a coat _______ it was cold.','She was tired _______ she went to bed early.','He studied hard _______ he passed the exam.','It was raining _______ we stayed indoors.']},
+  {head:'B. Complete the sentences',items:['I drink water because _______________________________.','The dog barked so _______________________________.','She was late because _______________________________.']},
+  {head:'C. Write 3 original sentences – one with "because" and two with "so"',items:['because: ________________________','so: ________________________','so: ________________________']}
+ ]},
+ evs:{topic:'Seasons in India',parts:[
+  {head:'A. Name the 3 main seasons',items:['1. _____________  2. _____________  3. _____________']},
+  {head:'B. Fill in the blanks',items:['In summer we get _______ from the trees.','The rainy season is also called the _______ season.','In winter we wear _______ clothes and drink _______ liquids.']},
+  {head:'C. Write 3 sentences about your favourite season',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ l2data:{topic:'Months of the Year in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'జనవరి  ఫిబ్రవరి  మార్చి  ఏప్రిల్  మే  జూన్\nజూలై  ఆగస్టు  సెప్టెంబర్  అక్టోబర్  నవంబర్  డిసెంబర్'},
+  {head:'B. Written Work',items:['Write each month twice.','Write the Telugu names for the current month and your birth month.']}
+ ]}
+},
+{day:22,l2:'Hindi',
+ math:{topic:'Symmetry',parts:[
+  {head:'A. True or False',items:['"A rectangle has a line of symmetry."  → _______','"A circle has no line of symmetry."  → _______','"The letter A has a line of symmetry."  → _______','"A triangle can have a line of symmetry."  → _______']},
+  {head:'B. Write 3 capital letters of the alphabet that have a line of symmetry',items:['1. ___  2. ___  3. ___']},
+  {head:'C. Draw',draw:true,text:'Draw the other half of these symmetric shapes in your notebook: a heart shape and a square.'}
+ ]},
+ english:{topic:'Prepositions – in, on, under, behind, in front of',parts:[
+  {head:'A. Fill with the correct preposition',items:['The cat sat _______ the mat.','The book is _______ the shelf.','The ball rolled _______ the table.','The car is parked _______ the house.','She stood _______ the gate.']},
+  {head:'B. Write 5 sentences using different prepositions',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']}
+ ]},
+ evs:{topic:'Community Helpers – Part 1',parts:[
+  {head:'A. Match the helper to their role',items:['Doctor  →  ___________','Farmer  →  ___________','Teacher  →  ___________','Police officer  →  ___________','Postman  →  ___________']},
+  {head:'B. Fill in the blanks',items:['We call _______ in an emergency.','Our food comes from the _______.','Letters and parcels are delivered by the _______.']},
+  {head:'C. Write about one community helper you admire (3 sentences)',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ l2data:{topic:'Months of the Year in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'जनवरी  फ़रवरी  मार्च  अप्रैल  मई  जून\nजुलाई  अगस्त  सितम्बर  अक्टूबर  नवम्बर  दिसम्बर'},
+  {head:'B. Written Work',items:['Write each month twice.','Write the Hindi names for the current month and your birth month.']}
+ ]}
+},
+{day:23,l2:'Telugu',
+ math:{topic:'Perimeter of Simple Shapes',parts:[
+  {head:'A. Find the perimeter',items:['Square with side 4 cm  →  Perimeter = _______','Rectangle: length 6 cm, width 3 cm  →  Perimeter = _______','Triangle with sides 3 cm, 4 cm, 5 cm  →  Perimeter = _______']},
+  {head:'B. Fill in the blanks',items:['Perimeter = sum of all _______.','Perimeter of a square = 4 × _______.','Perimeter of a rectangle = 2 × (length + _______ ).']},
+  {head:'C. Word Problem',wp:{text:'A garden is shaped like a rectangle. Its length is 10 m and its width is 5 m. What is the perimeter of the garden?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Prepositions – Writing Practice',parts:[
+  {head:'A. Fill in the prepositions',items:['The birds are sitting _______ the tree.','She put the cup _______ the table.','The dog hid _______ the sofa.','We sat _______ the teacher during the lecture.','The shoes were _______ the door.']},
+  {head:'B. Write a short passage (4–5 sentences) describing your classroom, using at least 4 different prepositions',items:['________________________________________________________','________________________________________________________','________________________________________________________']}
+ ]},
+ evs:{topic:'Community Helpers – Part 2',parts:[
+  {head:'A. Write what tool each helper uses',items:['Carpenter  →  ___________','Painter  →  ___________','Baker  →  ___________','Tailor  →  ___________','Doctor  →  ___________']},
+  {head:'B. Fill in the blanks',items:['Without farmers, we would have no _______.','Doctors work in _______.','Firefighters use _______ to put out fires.']},
+  {head:'C. Write about how 2 community helpers help you personally',items:['1. ________________________','2. ________________________']}
+ ]},
+ l2data:{topic:'Animals in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'సింహం  పులి  ఏనుగు  కోతి  పావురం  కుక్క  పిల్లి  ఆవు  గుర్రం  చేప'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 Telugu sentences about animals (oral).']}
+ ]}
+},
+{day:24,l2:'Hindi',
+ math:{topic:'Perimeter – Word Problems',parts:[
+  {head:'A. Solve the word problems',wp:{text:'(1) A square park has a side of 8 m. What length of fencing is needed?\n(2) A rectangular room is 12 m long and 6 m wide. What is the perimeter?\n(3) A triangular garden has sides 5 m, 8 m, and 7 m. What is the perimeter?',ans:'Ans 1: ___  Ans 2: ___  Ans 3: ___'}},
+  {head:'B. Fill in the blanks',items:['Perimeter is measured in _______ units.','The perimeter of a square park with side 5 m = _______ m.']}
+ ]},
+ english:{topic:'Reading Comprehension – The Elephant',comp:{
+   pass:'The elephant is the largest land animal. It has big ears, a long trunk, and four strong legs. Elephants live in forests and near rivers. They eat plants and fruits. Baby elephants are called calves. Elephants are well known for their excellent memory.',
+   qs:['Q1. What is the largest land animal?','Q2. What do elephants eat?','Q3. What are baby elephants called?','Q4. Name two features of an elephant.','Q5. Write one sentence about where elephants live.']
+ }},
+ evs:{topic:'Land Transport',parts:[
+  {head:'A. Name 5 vehicles used on land',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Fill in the blanks',items:['Transport that runs on roads is called _______ transport.','Trains run on _______.','The fastest land transport is a _______.']},
+  {head:'C. Match',items:['Bus  →  carries many passengers','Bicycle  →  short distances','Train  →  long distances','Car  →  __________________']}
+ ]},
+ l2data:{topic:'Animals in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'शेर  बाघ  हाथी  बंदर  कबूतर  कुत्ता  बिल्ली  गाय  घोड़ा  मछली'},
+  {head:'B. Written Work',items:['Write each word 3 times.','Write 3 Hindi sentences about animals (oral).']}
+ ]}
+},
+{day:25,l2:'Telugu',
+ math:{topic:'Time – Reading the Clock (Hours and Half Hours)',parts:[
+  {head:'A. Write the time shown on each clock',items:['Short hand on 3, long hand on 12  →  _______','Short hand on 7, long hand on 12  →  _______','Short hand between 4 and 5, long hand on 6  →  _______','Short hand between 9 and 10, long hand on 6  →  _______']},
+  {head:'B. Draw clock hands in your notebook for these times',items:['5:00    8:30    11:00    2:30']},
+  {head:'C. Fill in the blanks',items:['The short hand shows _______.','The long hand shows _______.','When the long hand points to 6, it is ___ past the hour.']}
+ ]},
+ english:{topic:'Reading Comprehension – Trees',comp:{
+   pass:'Trees are very important for us. They give us oxygen, fruits, wood, and shade. Trees are home to many birds and animals. When it rains, tree roots hold the soil together and prevent floods. Cutting too many trees causes floods and landslides. We must plant more trees to save our Earth.',
+   qs:['Q1. Name two things trees give us.','Q2. Why are tree roots important during rain?','Q3. What happens when too many trees are cut?','Q4. What should we do to save the Earth?','Q5. Write the main idea of this passage in one sentence.']
+ }},
+ evs:{topic:'Water and Air Transport',parts:[
+  {head:'A. Name 3 vehicles for water and 3 for air',items:['Water: _________ , _________ , _________','Air: _________ , _________ , _________']},
+  {head:'B. Fill in the blanks',items:['Aeroplanes carry people through _______.','Ships travel on _______.','The fastest mode of transport is _______.']},
+  {head:'C. Write 2 advantages of air travel',items:['1. ________________________','2. ________________________']}
+ ]},
+ l2data:{topic:'Colours in Telugu',parts:[
+  {head:'A. Read aloud',read:true,text:'ఎరుపు  నీలం  పసుపు  పచ్చ  తెలుపు  నలుపు  నారింజ  గులాబీ  గోధుమ  బూడిద'},
+  {head:'B. Written Work',items:['Write each colour word 3 times.','Write 3 sentences using colour names in Telugu (oral).']}
+ ]}
+},
+{day:26,l2:'Hindi',
+ math:{topic:'Time – Reading Minutes and am / pm',parts:[
+  {head:'A. Write the time',items:['Short hand near 4, long hand on 3  →  _______','Short hand near 7, long hand on 9  →  _______','Short hand between 10 and 11, long hand on 6  →  _______','Short hand near 1, long hand on 4  →  _______']},
+  {head:'B. Fill in the blanks',items:['60 minutes = _______ hour','30 minutes = _______ of an hour','15 minutes = _______ of an hour','am stands for _______ and pm stands for _______.']},
+  {head:'C. Word Problem',wp:{text:'School starts at 8:00 am and ends at 1:30 pm. How long is the school day?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Reading Comprehension – The Clever Crow',comp:{
+   pass:'Rani was a clever crow. One day she was very thirsty. She found a pot with a little water at the bottom. She could not reach the water. Then she had an idea. She dropped pebbles into the pot one by one. The water rose up. Rani drank the water happily. Hard work and clever thinking always help us.',
+   qs:['Q1. Who is the story about?','Q2. What problem did the crow face?','Q3. How did the crow solve her problem?','Q4. What did she drop into the pot?','Q5. What lesson does this story teach us?']
+ }},
+ evs:{topic:'Communication – Ways of Communicating',parts:[
+  {head:'A. Name 5 ways we communicate',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Fill in the blanks',items:['Before mobile phones, people communicated by _______.','The internet is used for _______ communication.','Newspapers give us _______ about the world.']},
+  {head:'C. Write how you would send a message to your grandmother if you had no phone',items:['________________________________________________________','________________________________________________________']}
+ ]},
+ l2data:{topic:'Colours in Hindi',parts:[
+  {head:'A. Read aloud',read:true,text:'लाल  नीला  पीला  हरा  सफ़ेद  काला  नारंगी  गुलाबी  भूरा  बैंगनी'},
+  {head:'B. Written Work',items:['Write each colour word 3 times.','Write 3 sentences using colour names in Hindi (oral).']}
+ ]}
+},
+{day:27,l2:'Telugu',
+ math:{topic:'Time – Word Problems',parts:[
+  {head:'A. Solve the word problems',wp:{text:'(1) Arun starts reading at 4:00 pm. He reads for 1 hour 30 minutes. When does he finish?\n(2) A movie starts at 3:30 pm and lasts 2 hours. What time does it end?\n(3) School starts at 8:00 am and lasts 5 hours 30 minutes. When does it end?',ans:'Ans 1: ___  Ans 2: ___  Ans 3: ___'}},
+  {head:'B. Write the times for',items:['When you wake up → _______  When school starts → _______  When you eat dinner → _______']}
+ ]},
+ english:{topic:'Punctuation – Full Stop, Question Mark, Exclamation Mark, Comma',parts:[
+  {head:'A. Add the correct punctuation mark',items:['The sun is very bright ___','What is your favourite subject ___','Wow, what a beautiful rainbow ___','Please open the window ___']},
+  {head:'B. Add commas in the correct places',items:['I need to buy apples bananas oranges and grapes.','She is kind gentle and very helpful.','We went to the park the market and the library.']},
+  {head:'C. Write 2 sentences for each mark',items:['Full stop (.): 1. _________________ 2. _________________','Question mark (?): 1. _________________ 2. _________________','Exclamation mark (!): 1. _________________ 2. _________________']}
+ ]},
+ evs:{topic:'Our Solar System – Introduction',parts:[
+  {head:'A. Name the 8 planets in order from the Sun',items:['1. ___________  2. ___________  3. ___________  4. ___________','5. ___________  6. ___________  7. ___________  8. ___________']},
+  {head:'B. Fill in the blanks',items:['The planet we live on is _______.','The star closest to Earth is _______.','The Moon goes around _______.','The Sun is a _______ (star / planet).']},
+  {head:'C. Write 3 interesting facts about the Sun',items:['1. ________________________','2. ________________________','3. ________________________']}
+ ]},
+ l2data:{topic:'Telugu Poem – Practice',parts:[
+  {head:'A. Read aloud 3 times',read:true,text:'పువ్వులు పూశాయి తోటలో,\nరంగులు వెదజల్లాయి వాటిలో,\nతుమ్మెదలు వచ్చాయి వాటి దగ్గర,\nప్రకృతి అందం కనబడింది నిజంగా.\n\n(Meaning: Flowers bloomed in the garden, colours spread among them, bees came to them, nature\'s beauty was truly seen.)'},
+  {head:'B. Written Work',items:['Write the poem once in your notebook.','Write the meaning of the poem in English.']}
+ ]}
+},
+{day:28,l2:'Hindi',
+ math:{topic:'Money – Rupees and Paise',parts:[
+  {head:'A. Fill in the blanks',items:['1 rupee = _______ paise','50 paise = _______ rupee','₹5 = _______ paise','₹2.50 = _______ paise']},
+  {head:'B. Add or subtract',items:['₹15 + ₹23 = ___','₹8.50 + ₹6.50 = ___','₹100 − ₹35 = ___','₹50 − ₹27.50 = ___']},
+  {head:'C. Word Problem',wp:{text:'Riya had ₹50. She bought a pen for ₹12 and an eraser for ₹5. How much money did she have left?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Capital Letters – Rules and Practice',parts:[
+  {head:'A. Correct the capital letters in these sentences',items:['my name is rahul sharma. i live in delhi.','every monday we go to school in the morning.','the river ganga flows through india.']},
+  {head:'B. Write the 4 rules for using capital letters',items:['Rule 1: ________________________________','Rule 2: ________________________________','Rule 3: ________________________________','Rule 4: ________________________________']},
+  {head:'C. Write 5 correct sentences using capital letters',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']}
+ ]},
+ evs:{topic:'Day and Night',parts:[
+  {head:'A. Fill in the blanks',items:['The Earth rotates around the _______.','When our side of the Earth faces the Sun it is _______.','When our side faces away from the Sun it is _______.','It takes _______ hours for the Earth to rotate once.']},
+  {head:'B. Write 3 things we do during the day and 3 at night',items:['Day: _____________ , _____________ , _____________','Night: _____________ , _____________ , _____________']},
+  {head:'C. Draw',draw:true,text:'Draw the Earth and shade the side that is night. Label day and night sides.'}
+ ]},
+ l2data:{topic:'Short Hindi Poem – Practice',parts:[
+  {head:'A. Read aloud 3 times',read:true,text:'फूल खिले हैं बाग में,\nरंग-बिरंगे प्यारे,\nतितलियाँ आती हैं उड़ती,\nकितने लगते हैं न्यारे।\n\n(Meaning: Flowers bloom in the garden, colourful and lovely, butterflies come flying, how wonderful they look.)'},
+  {head:'B. Written Work',items:['Write the poem once in your notebook.','Write the meaning of the poem in English.']}
+ ]}
+},
+{day:29,l2:'Telugu',
+ math:{topic:'Money – Word Problems',parts:[
+  {head:'A. Solve the word problems',wp:{text:'(1) A shirt costs ₹350. Pants cost ₹450. What is the total cost?\n(2) Mohan had ₹500. He bought books for ₹175. How much is left?\n(3) A pen costs ₹12. A pencil costs ₹5. What is the cost of 3 pens and 4 pencils?',ans:'Ans 1: ___  Ans 2: ___  Ans 3: ___'}},
+  {head:'B. Fill in the blanks',items:['The symbol for rupee is _______.','100 paise = 1 _______.','If I have ₹200 and spend ₹85, I have ₹_______ left.']}
+ ]},
+ english:{topic:'Creative Writing – My Best Friend',parts:[
+  {head:'A. Write about your best friend (5–6 sentences). Include: name, what they look like, what you do together, why you like them.',items:['________________________________________________________','________________________________________________________','________________________________________________________','________________________________________________________','________________________________________________________']},
+  {head:'B. Draw',draw:true,text:'Draw your best friend in your notebook and label: hair, eyes, smile.'}
+ ]},
+ evs:{topic:'Our Environment – Keeping it Clean',parts:[
+  {head:'A. Write 5 things we can do to keep the environment clean',items:['1. ________________________','2. ________________________','3. ________________________','4. ________________________','5. ________________________']},
+  {head:'B. True or False',items:['"We should throw garbage in dustbins."  → _______','"Burning dry leaves is good for the environment."  → _______','"Planting trees helps the environment."  → _______','"Using plastic bags is harmful."  → _______']},
+  {head:'C. Write a slogan for keeping the environment clean',items:['My slogan: ________________________________________________________']}
+ ]},
+ l2data:{topic:'Telugu – Revision (Mixed Practice)',parts:[
+  {head:'A. Write 5 Telugu words for animals',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Write the Telugu vowels from memory',items:['__________________________________________________']},
+  {head:'C. Write 3 simple Telugu sentences',items:['1. ________________________','2. ________________________','3. ________________________']},
+  {head:'D. Oral: Count from 1 to 10 in Telugu',items:['Practice aloud with a parent or on your own.']}
+ ]}
+},
+{day:30,l2:'Hindi',
+ math:{topic:'Revision – Mixed Topics',parts:[
+  {head:'A. Fractions',items:['3/7 + 2/7 = ___','5/9 − 3/9 = ___','Arrange in ascending order: 2/6, 5/6, 1/6, 4/6 → ___']},
+  {head:'B. Multiplication and Division',items:['8×7=___  9×6=___  7×8=___  6×9=___','24÷4=___  35÷7=___  48÷6=___  63÷9=___']},
+  {head:'C. Measurement',items:['2 kg = _______ g','1 L 500 ml = _______ ml','150 cm = _______ m _______ cm','Rectangle: 8 cm × 5 cm → Perimeter = _______ cm']},
+  {head:'D. Word Problem',wp:{text:'A shop has 6 shelves. Each shelf has 9 bottles. The shopkeeper sells 18 bottles. How many bottles are left?',ans:'Answer: _______________________________'}}
+ ]},
+ english:{topic:'Creative Writing – My Favourite Animal',parts:[
+  {head:'A. Write about your favourite animal (5–6 sentences). Include: name, where it lives, what it eats, special features, why you like it.',items:['________________________________________________________','________________________________________________________','________________________________________________________','________________________________________________________','________________________________________________________']},
+  {head:'B. Draw',draw:true,text:'Draw your favourite animal and label its special features.'}
+ ]},
+ evs:{topic:'Recycling and Conservation',parts:[
+  {head:'A. Write 3 things we can recycle',items:['1. ___________  2. ___________  3. ___________']},
+  {head:'B. Fill in the blanks',items:['Reduce, Reuse, Recycle is called the _______ R\'s.','We should save _______ by switching off lights.','Plant more _______ to keep the air clean.','Avoid using _______ bags to reduce pollution.']},
+  {head:'C. Write 3 things you will do at home to help the environment',items:['1. ________________________','2. ________________________','3. ________________________']}
+ ]},
+ l2data:{topic:'Hindi – Revision (Mixed Practice)',parts:[
+  {head:'A. Write 5 Hindi words for fruits',items:['1. ___________  2. ___________  3. ___________  4. ___________  5. ___________']},
+  {head:'B. Write the Hindi vowels from memory',items:['__________________________________________________']},
+  {head:'C. Write 3 simple Hindi sentences',items:['1. ________________________','2. ________________________','3. ________________________']},
+  {head:'D. Oral: Count from 1 to 10 in Hindi',items:['Practice aloud with a parent or on your own.']}
+ ]}
+}
+]; // end of D array
+
+// ════════════════════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════════════════════
+let cur = 0;
+
+function renderDay(i){
+  const d = D[i];
+  const isHindi = d.l2 === 'Hindi';
+  const l2cls = isHindi ? 'H' : 'T';
+  const l2icon = isHindi ? '🇮🇳' : '🌸';
+  const l2label = isHindi ? 'Hindi (2nd Language)' : 'Telugu (2nd Language)';
+
+  const subjectHTML = (cls, icon, label, data) => {
+    if(!data) return '';
+    let inner = '';
+
+    // Handle "parts" array
+    const parts = data.parts || [];
+    parts.forEach(p => {
+      inner += `<div class="ex"><div class="ex-head">${p.head}</div>`;
+
+      if(p.read){
+        inner += `<div class="read-box">${p.text.replace(/\n/g,'<br>')}</div>`;
+      } else if(p.wp){
+        inner += `<div class="wp-box"><div class="wp-text">📝 ${p.wp.text.replace(/\n/g,'<br><br>')}</div><div class="wp-ans">${p.wp.ans}</div></div>`;
+      } else if(p.comp){
+        inner += `<div class="comp-passage">${p.comp.pass}</div><ul class="ex-items">`;
+        p.comp.qs.forEach(q => { inner += `<li>${q}<br><span style="display:block;margin-top:4px;border-bottom:1px solid #94a3b8;width:90%;height:14px;"></span></li>`; });
+        inner += `</ul>`;
+      } else if(p.draw){
+        inner += `<div class="draw-hint">✏️ Draw here in your rough notebook</div>`;
+      } else if(p.items){
+        inner += `<ul class="ex-items">`;
+        p.items.forEach(it => { inner += `<li>${it}</li>`; });
+        inner += `</ul>`;
+      }
+      inner += `</div>`;
+    });
+
+    // Also handle top-level wp / comp (for days where parts wraps a single wp)
+    if(data.wp){
+      inner += `<div class="ex"><div class="wp-box"><div class="wp-text">📝 ${data.wp.text.replace(/\n/g,'<br><br>')}</div><div class="wp-ans">${data.wp.ans}</div></div></div>`;
+    }
+    if(data.comp){
+      inner += `<div class="ex"><div class="comp-passage">${data.comp.pass}</div><ul class="ex-items">`;
+      data.comp.qs.forEach(q => { inner += `<li>${q}<br><span style="display:block;margin-top:4px;border-bottom:1px solid #94a3b8;width:90%;height:14px;"></span></li>`; });
+      inner += `</ul></div>`;
+    }
+
+    return `<div class="subj ${cls}">
+      <div class="subj-hd">${icon} ${label}<span class="subj-topic">${data.topic || ''}</span></div>
+      <div class="subj-body">${inner}</div>
+    </div>`;
+  };
+
+  const html = `
+    <div class="nav-row">
+      <button class="arrowbtn" onclick="goDay(${i-1})" ${i===0?'disabled':''}>← Previous</button>
+      <span class="day-pill">Worksheet ${i+1} of 30</span>
+      <button class="arrowbtn" onclick="goDay(${i+1})" ${i===29?'disabled':''}>Next →</button>
+    </div>
+    <div class="ws-head">
+      <div class="wsh-top">
+        <span class="wsh-school">🏫 The Global Edge School</span>
+        <span class="wsh-year">2026–27</span>
+      </div>
+      <div class="wsh-bottom">
+        <div class="wsh-cell">Daily Plan &nbsp;|&nbsp; <span>Math, English, EVS &amp; ${d.l2}</span></div>
+        <div class="wsh-cell">Class: 3 &nbsp;|&nbsp; <span>Worksheet ${i+1} of 30</span></div>
+      </div>
+    </div>
+    <div class="ws-banner">📅 Plan for Worksheet ${i+1} — ${d.l2} Day</div>
+    <div class="ws-note">📓 All written work to be done in a rough notebook unless otherwise stated.</div>
+
+    ${subjectHTML('M','🔵','Math',d.math)}
+    ${subjectHTML('E','🟢','English',d.english)}
+    ${subjectHTML('V','🟠','EVS (Environmental Science)',d.evs)}
+    ${subjectHTML(l2cls,l2icon,l2label,d.l2data)}
+
+    <div class="pnote">
+      <div class="pnote-title">📝 Instructions for Parents</div>
+      <ul>
+        <li>Allow short breaks between subjects.</li>
+        <li>Encourage neat work — progress matters more than perfection.</li>
+        <li>Support reading exercises but let the child try independently first.</li>
+        <li>Oral activities marked "(Oral)" should be spoken aloud, not written.</li>
+        <li>Drawing activities to be done in the rough notebook.</li>
+      </ul>
+    </div>
+    <div class="ws-footer">The Global Edge School — <em>Ahead of the Learning Curve</em> &nbsp;|&nbsp; Grade 3 · Worksheet ${i+1} of 30</div>
+  `;
+  document.getElementById('wsArea').innerHTML = html;
+}
+
+function goDay(i){
+  if(i<0||i>29) return;
+  cur = i;
+  document.querySelectorAll('.dbtn').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  renderDay(i);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Build nav
+(function buildNav(){
+  const nav = document.getElementById('daynav');
+  for(let i=0;i<30;i++){
+    const b = document.createElement('button');
+    b.className='dbtn'+(i===0?' active':'');
+    b.textContent=i+1;
+    b.onclick=()=>goDay(i);
+    nav.appendChild(b);
+  }
+})();
+
+renderDay(0);
+</script>
+
+</body>
+</html>
